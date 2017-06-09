@@ -12,13 +12,18 @@ shinyServer(function(input, output) {
   # })
   output$answer = renderText({
     answer = c()
+    score = c()
     observeEvent(input$reset,
                  {reset("input$drp1")})
     for (i in c(input$drp1,input$drp2,input$drp3,input$drp4,input$drp5)){
-      if ((i == "Calender Year")|(i == "Population")|(i == "Family Size")|(i == "Heart Rate(beats per minute)")|(i == "T-shirt Size"))
-      {answer = c(answer, "Correct")}else{answer = c(answer, "Wrong")}
+      if ((i == "Calender Year")|(i == "Population")|(i == "Family Size")|(i == "Heart Rate(beats per minute)")|(i == "T-shirt Size")){
+        answer = c(answer, "Correct")
+        score = c(score, 4)}else{
+         answer = c(answer, "Wrong")
+         score = c(score, -4)}
     }
     print(answer)
+    print(sum(score))
    
   })
   
